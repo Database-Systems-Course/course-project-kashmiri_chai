@@ -1,0 +1,29 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style type="text/css">
+    .btn1 {
+        position: absolute;
+        top: 70%;
+        left: 60%;
+        width: 10%;
+        height: 10%;
+        margin: -15% 0 0 -25%;
+      }
+    .btn2 {
+        position: absolute;
+        top: 70%;
+        left: 80%;
+        width: 10%;
+        height: 10%;
+        margin: -15% 0 0 -25%;
+    }
+    body {
+         
+        background-color: #262626 !important; 
+    }
+   </style>
+
+
+<input type="button" class="btn btn-primary btn-lg btn1" name="add_btn" onclick="location.href='{% url 'polls:add_view' %}'" value="Add"/>
+<input type="button" class="btn btn-primary btn-lg btn2" name="search_btn" onclick="location.href='{% url 'polls:search_view' %}'" value="Search"/>

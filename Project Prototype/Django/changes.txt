@@ -1,0 +1,11 @@
+interpreter call one to many (cust/comp)
+
+project one to many (cust/comp)
+
+ratet durations
+
+rate to project - one to one to
+
+transaction to project - one to one 
+
+
