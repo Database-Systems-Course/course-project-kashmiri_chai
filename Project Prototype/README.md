@@ -1,3 +1,4 @@
 Database Project Prototype
 
-Add Project Application Prototype in this folder
+#Web Interface using Django framework for Python
+The interface is web-based and utilizes django for python. The project folder is uploaded as it is but will require the latest version of python and django to be compiled and run. In order to avoid the hassle of doing that, you can just go through the screenshots in ascending order and they will portray all functionailty.
