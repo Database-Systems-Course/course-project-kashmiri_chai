@@ -8,6 +8,8 @@ class AddForm(forms.Form):
     ('company', 'Company'),
     ('content', 'Content'),
     ('students', 'Students'),
+    ('project', 'Project'),
+    ('call', 'Call Record'),
     ]
     mode = forms.CharField(label='Category', 
     widget=forms.Select(choices=CATEGORY_CHOICES))
@@ -51,7 +53,6 @@ class ContentForm(forms.Form):
     link = forms.CharField(label='Link')
     date_of_release = forms.DateField(label='Date of Release')
     
-
 class StudentsForm(forms.Form):
     name = forms.CharField(label='Name')
     age = forms.CharField(label='Age')
@@ -62,6 +63,18 @@ class StudentsForm(forms.Form):
     city = forms.CharField(label='City')
     batch_no = forms.CharField(label='Batch Number')
 
+class ProjectForm(forms.Form):
+    interpreter_name = forms.CharField(label='Name')
+    client_name = forms.CharField(label='Client')
+    date = forms.DateField(label='Date')
+    start_time = forms.TimeField(label='Start Time')
+    end_time = forms.TimeField(label='End Time')
+    payment = forms.CharField(label='Payment')
+    payment_status = forms.BooleanField(label='Payment Status', required=False)
+
+class CallForm(forms.Form):
+    name = forms.CharField(label='Name')
+
 class SearchForm(forms.Form):
     name = forms.CharField(label='Name/Title')
     CATEGORY_CHOICES= [
@@ -70,8 +83,8 @@ class SearchForm(forms.Form):
     ('company', 'Company'),
     ('content', 'Content'),
     ('students', 'Students'),
+    ('project', 'Project'),
+    ('call', 'Call Record'),
     ]
     mode = forms.CharField(label='Category', 
     widget=forms.Select(choices=CATEGORY_CHOICES))
-    
-    

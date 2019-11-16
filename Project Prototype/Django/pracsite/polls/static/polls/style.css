@@ -1,0 +1,16 @@
+#primary { 
+    text-align: center;
+}
+form {
+    display: inline-block;
+}
+body {
+    color: white;
+    background-color: #262626 !important; 
+}
+#back_btn {
+    position: absolute;
+    top: 90%;
+    left: 2%;
+    text-align: left;
+}

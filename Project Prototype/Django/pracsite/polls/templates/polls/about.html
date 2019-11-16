@@ -1,0 +1,53 @@
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style type="text/css">
+    body {
+        color: white;
+        background-color: #262626 !important; 
+    }
+    #primary {
+        text-align: center;
+    }
+    #back_btn {
+        position: absolute;
+        top: 90%;
+        left: 2%;
+    }
+    table {
+        text-align: center;
+    }
+    td {
+        padding: 10px;
+    }
+   </style>
+<body>
+    <div class="container" id="primary">
+
+        <h1>About</h1>
+        <br><br><br>
+        <h2>Created By:</h2>
+        <table align="center">
+            <tr>
+                <img src="{% static "polls/arhum.png" %}" alt="My image" height=200 width=210>
+                <img src="{% static "polls/owais.png" %}" alt="My image" height=200 width=210>
+            </tr>
+            <tr>
+                <td>
+                    <h3>Arhum Ishtiaq</h3>
+                </td>
+                <td>
+                    <h3>Owais Bin Asad</h3>
+                </td>                    
+            </tr>
+        </table>
+
+
+
+    </div>
+    <button class="btn btn-primary btn-lg" id="back_btn" 
+    onclick="location.href='{% url 'polls:index' %}'">Back</button>
+</body>
+</html>
