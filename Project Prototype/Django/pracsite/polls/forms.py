@@ -3,53 +3,53 @@ from polls.models import *
 
 
 class AddForm(forms.Form):
-    #fields for interpreters, clients, content, students
-    CATEGORY_CHOICES= [
-    ('interpreters', 'Interpreters'),
-    ('ind_cust', 'Individual Customer'),
-    ('company', 'Company'),
-    ('content', 'Content'),
-    ('students', 'Students'),
-    ('project', 'Project'),
-    ('call', 'Call Record'),
+    # fields for interpreters, clients, content, students
+    CATEGORY_CHOICES = [
+        ('interpreters', 'Interpreters'),
+        ('ind_cust', 'Individual Customer'),
+        ('company', 'Company'),
+        ('content', 'Content'),
+        ('students', 'Students'),
+        ('project', 'Project'),
+        ('call', 'Call Record'),
     ]
     mode = forms.CharField(label='Category',
                            widget=forms.Select(choices=CATEGORY_CHOICES))
 
 
 class InterpreterForm(forms.ModelForm):
-    GENDER_CHOICES = [
-        ('male', 'Male'),
-        ('female', 'Female'),
-    ]
+    # GENDER_CHOICES = [
+    #     ('male', 'Male'),
+    #     ('female', 'Female'),
+    # ]
 
-    name = forms.CharField(label='Name')
-    age = forms.IntegerField(label='Age')
-    gender = forms.CharField(label='Gender',
-                             widget=forms.Select(choices=GENDER_CHOICES))
-    mobile_no = forms.CharField(label='Mobile Number')
-    nic_no = forms.CharField(label='CNIC Number')
-    address = forms.CharField(label='Address')
+    # name = forms.CharField(label='Name')
+    # age = forms.IntegerField(label='Age')
+    # gender = forms.CharField(label='Gender',
+    #                          widget=forms.Select(choices=GENDER_CHOICES))
+    # mobile_no = forms.CharField(label='Mobile Number')
+    # nic_no = forms.CharField(label='CNIC Number')
+    # address = forms.CharField(label='Address')
 
     class Meta:
         model = interpreter
         fields = ('name', 'age', 'nic_no', 'address', 'mobile_no',
-                  'gender', 'calls_served', 'average_rating', 'date_of_joining')
+                  'gender', 'date_of_joining')
 
 
 class CustomerForm(forms.ModelForm):
-    GENDER_CHOICES = [
-        ('male', 'Male'),
-        ('female', 'Female'),
-    ]
+    # GENDER_CHOICES = [
+    #     ('male', 'Male'),
+    #     ('female', 'Female'),
+    # ]
 
-    name = forms.CharField(label='Name')
-    age = forms.IntegerField(label='Age')
-    gender = forms.CharField(label='Gender',
-                             widget=forms.Select(choices=GENDER_CHOICES))
-    mobile_no = forms.CharField(label='Mobile Number')
-    nic_no = forms.CharField(label='CNIC Number')
-    address = forms.CharField(label='Address')
+    # name = forms.CharField(label='Name')
+    # age = forms.IntegerField(label='Age')
+    # gender = forms.CharField(label='Gender',
+    #                          widget=forms.Select(choices=GENDER_CHOICES))
+    # mobile_no = forms.CharField(label='Mobile Number')
+    # nic_no = forms.CharField(label='CNIC Number')
+    # address = forms.CharField(label='Address')
 
     class Meta:
         model = customer
@@ -58,10 +58,10 @@ class CustomerForm(forms.ModelForm):
 
 
 class CompanyForm(forms.ModelForm):
-    name = forms.CharField(label='Name')
-    address = forms.CharField(label='Address')
-    poc_name = forms.CharField(label='PoC Name')
-    poc_mobile_no = forms.CharField(label='PoC Mobile Number')
+    # name = forms.CharField(label='Name')
+    # address = forms.CharField(label='Address')
+    # poc_name = forms.CharField(label='PoC Name')
+    # poc_mobile_no = forms.CharField(label='PoC Mobile Number')
 
     class Meta:
         model = company
@@ -70,20 +70,31 @@ class CompanyForm(forms.ModelForm):
 
 
 class ContentForm(forms.ModelForm):
-    title = forms.CharField(label='Title')
-    link = forms.CharField(label='Link')
-    date_of_release = forms.DateField(label='Date of Release')
-    
+    # title = forms.CharField(label='Title')
+    # interpreter = forms.(label='Interpreter')
+    # link = forms.CharField(label='Link')
+    # date_of_release = forms.DateField(label='Date of Release')
+
+    class Meta:
+        model = content
+        fields = ('title', 'interpreter', 'link', 'date_of_release')
+
 
 class StudentsForm(forms.ModelForm):
-    name = forms.CharField(label='Name')
-    age = forms.IntegerField(label='Age')
-    mobile_no = forms.CharField(label='Mobile Number')
-    level = forms.CharField(label='Level')
-    classification = forms.CharField(label='Classification')
-    occupation = forms.CharField(label='Occupation')
-    city = forms.CharField(label='City')
-    batch_no = forms.IntegerField(label='Batch Number')
+    # name = forms.CharField(label='Name')
+    # age = forms.IntegerField(label='Age')
+    # mobile_no = forms.CharField(label='Mobile Number')
+    # level = forms.CharField(label='Level')
+    # classification = forms.CharField(label='Classification')
+    # occupation = forms.CharField(label='Occupation')
+    # city = forms.CharField(label='City')
+    # batch_no = forms.IntegerField(label='Batch Number')
+    # trainer = forms.CharField(label='Trainer')
+
+    class Meta:
+        model = student
+        fields = ('name', 'age', 'gender', 'mobile_no', 'city',
+                  'level', 'classification', 'occupation', 'batch_no', 'trainer')
 
 
 class ProjectForm(forms.ModelForm):
@@ -95,19 +106,21 @@ class ProjectForm(forms.ModelForm):
     payment = forms.CharField(label='Payment')
     payment_status = forms.BooleanField(label='Payment Status', required=False)
 
+
 class CallForm(forms.ModelForm):
     name = forms.CharField(label='Name')
 
-class SearchForm(forms.ModelForm):
+
+class SearchForm(forms.Form):
     name = forms.CharField(label='Name/Title')
-    CATEGORY_CHOICES= [
-    ('interpreters', 'Interpreters'),
-    ('ind_cust', 'Individual Customer'),
-    ('company', 'Company'),
-    ('content', 'Content'),
-    ('students', 'Students'),
-    ('project', 'Project'),
-    ('call', 'Call Record'),
+    CATEGORY_CHOICES = [
+        ('interpreters', 'Interpreters'),
+        ('ind_cust', 'Individual Customer'),
+        ('company', 'Company'),
+        ('content', 'Content'),
+        ('students', 'Students'),
+        ('project', 'Project'),
+        ('call', 'Call Record'),
     ]
-    mode = forms.CharField(label='Category', 
-    widget=forms.Select(choices=CATEGORY_CHOICES))
+    mode = forms.CharField(label='Category',
+                           widget=forms.Select(choices=CATEGORY_CHOICES))
