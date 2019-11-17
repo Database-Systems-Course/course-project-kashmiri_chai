@@ -3,13 +3,15 @@ from polls.models import *
 
 
 class AddForm(forms.Form):
-    # fields for interpreters, clients, content, students
-    CATEGORY_CHOICES = [
-        ('interpreters', 'Interpreters'),
-        ('ind_cust', 'Individual Customer'),
-        ('company', 'Company'),
-        ('content', 'Content'),
-        ('students', 'Students'),
+    #fields for interpreters, clients, content, students
+    CATEGORY_CHOICES= [
+    ('interpreters', 'Interpreters'),
+    ('ind_cust', 'Individual Customer'),
+    ('company', 'Company'),
+    ('content', 'Content'),
+    ('students', 'Students'),
+    ('project', 'Project'),
+    ('call', 'Call Record'),
     ]
     mode = forms.CharField(label='Category',
                            widget=forms.Select(choices=CATEGORY_CHOICES))
@@ -84,14 +86,28 @@ class StudentsForm(forms.ModelForm):
     batch_no = forms.IntegerField(label='Batch Number')
 
 
+class ProjectForm(forms.ModelForm):
+    interpreter_name = forms.CharField(label='Name')
+    client_name = forms.CharField(label='Client')
+    date = forms.DateField(label='Date')
+    start_time = forms.TimeField(label='Start Time')
+    end_time = forms.TimeField(label='End Time')
+    payment = forms.CharField(label='Payment')
+    payment_status = forms.BooleanField(label='Payment Status', required=False)
+
+class CallForm(forms.ModelForm):
+    name = forms.CharField(label='Name')
+
 class SearchForm(forms.ModelForm):
     name = forms.CharField(label='Name/Title')
-    CATEGORY_CHOICES = [
-        ('interpreters', 'Interpreters'),
-        ('ind_cust', 'Individual Customer'),
-        ('company', 'Company'),
-        ('content', 'Content'),
-        ('students', 'Students'),
+    CATEGORY_CHOICES= [
+    ('interpreters', 'Interpreters'),
+    ('ind_cust', 'Individual Customer'),
+    ('company', 'Company'),
+    ('content', 'Content'),
+    ('students', 'Students'),
+    ('project', 'Project'),
+    ('call', 'Call Record'),
     ]
-    mode = forms.CharField(label='Category',
-                           widget=forms.Select(choices=CATEGORY_CHOICES))
+    mode = forms.CharField(label='Category', 
+    widget=forms.Select(choices=CATEGORY_CHOICES))

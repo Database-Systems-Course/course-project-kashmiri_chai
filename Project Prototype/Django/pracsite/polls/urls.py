@@ -11,4 +11,7 @@ urlpatterns = [
     path('company/', views.CompanyView.as_view(), name="company_view"),
     path('content/', views.ContentView.as_view(), name="content_view"),
     path('students/', views.StudentsView.as_view(), name="students_view"),
+    path('project/', views.ProjectView.as_view(), name="project_view"),
+    path('call', views.CallView.as_view(), name="call_view"),
+    path('about/', views.AboutView.as_view(), name="about_view"),
 ]

@@ -1,0 +1,76 @@
+{% load static %}
+<title>
+    ConnectHear | About
+</title>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style type="text/css">
+    body {
+        color: white;
+        background-color: #262626 !important;
+    }
+    #primary {
+        text-align: center;
+    }
+    #back_btn {
+        position: absolute;
+        top: 90%;
+        left: 2%;
+    }
+    table {
+        text-align: center;
+    }
+    td {
+        padding-left: 68px;
+        padding-right: 68px;
+        padding-top: 5px;
+    }
+    #header {
+        background-color: #0275d8 !important;
+        color: white;
+        padding-left: 10px;
+        padding-bottom: 5px;
+        box-shadow: 0px 1px 5px black;
+        font-size: 45px;
+    }
+    #pp {
+        margin-left: 10px;
+        margin-right: 10px;
+        box-shadow: 3px 3px 5px black;
+    }
+    #logo {
+        position: absolute;
+        right: 1%;
+        top: 2%;
+        zoom: 0.035;
+    }
+   </style>
+<body>
+    <div id="header" class="display-4">
+        <img src="{% static "polls/ch_logo.png" %}" id="logo">
+        About Section
+    </div>
+    <div class="container" id="primary">
+        <br><br><br>
+        <h2 class="font-weight-light">Created By:</h2>
+        <br>
+        <table align="center">
+            <tr>
+                <img src="{% static "polls/arhum.png" %}" alt="Arhum Ishtiaq" width=230 height=230 id="pp">
+                <img src="{% static "polls/owais.png" %}" alt="Owais Bin Asad" width=230 height=230 id="pp">
+            </tr>
+            <tr>
+                <td><h5 class="font-weight-light">Arhum Ishtiaq</h5></td>
+                <td><h5 class="font-weight-light">Owais Bin Asad</h5></td>                    
+            </tr>
+        </table>
+
+
+
+    </div>
+    <button class="btn btn-primary btn-lg" id="back_btn" 
+    onclick="location.href='{% url 'polls:index' %}'">Back</button>
+</body>
+</html>

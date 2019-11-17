@@ -29,6 +29,10 @@ class AddView(TemplateView):
                 return redirect('polls:content_view')
             elif mode == "students":
                 return redirect('polls:students_view')
+            elif mode == "project":
+                return redirect('polls:project_view')
+            elif mode == "call":
+                return redirect('polls:call_view')
         
         args = {'form':form}
         return render(request, self.template_name, args)
@@ -128,3 +132,39 @@ class StudentsView(TemplateView):
         
         args = {'form':form}
         return render(request, self.template_name, args)
+
+class ProjectView(TemplateView):
+    template_name = 'polls/project.html'
+    def get(self , request):
+        form = ProjectForm()
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            #extract data from form
+            
+            print(form.cleaned_data)
+            return redirect('polls:index')
+        
+        args = {'form':form}
+        return render(request, self.template_name, args)
+
+class CallView(TemplateView):
+    template_name = 'polls/call.html'
+    def get(self , request):
+        form = CallForm()
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
+        form = CallForm(request.POST)
+        if form.is_valid():
+            #extract data from form
+            print(form.cleaned_data)
+            return redirect('polls:index')
+        
+        args = {'form':form}
+        return render(request, self.template_name, args)
+
+class AboutView(TemplateView):
+    template_name = 'polls/about.html'
