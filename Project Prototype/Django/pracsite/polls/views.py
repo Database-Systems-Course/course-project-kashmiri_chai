@@ -70,8 +70,8 @@ class InterpreterView(TemplateView):
         args = {'form':form}
         return render(request, self.template_name, args)
     
-    def __unicode__(self):
-        return u"%s" % self.name
+    def __str__(self):
+        return self.name
 
 class CustomerView(TemplateView):
     template_name = 'polls/customer.html'

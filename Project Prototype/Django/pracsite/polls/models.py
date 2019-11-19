@@ -16,6 +16,9 @@ class interpreter(models.Model):
     average_rating = models.FloatField(blank = True, null=True)
     date_of_joining = models.DateField()
 
+    def __str__(self):
+        return self.name
+
 class customer(models.Model):
     GENDER_CHOICES = [
         ('male', 'Male'),
@@ -29,6 +32,9 @@ class customer(models.Model):
     address = models.CharField(max_length=200)
     date_of_joining = models.DateField()
 
+    def __str__(self):
+        return self.name
+
 class company(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
@@ -36,12 +42,17 @@ class company(models.Model):
     poc_mobile_no = models.IntegerField()
     date_of_joining = models.DateField()
 
+    def __str__(self):
+        return self.name
+
 class content(models.Model):
     title = models.CharField(max_length=100)
     interpreter = models.ForeignKey(interpreter, on_delete=models.CASCADE)
     link = models.URLField(max_length=100)
     date_of_release = models.DateField()
 
+    def __str__(self):
+        return self.title
 
 class student(models.Model):
     GENDER_CHOICES = [
@@ -73,3 +84,6 @@ class student(models.Model):
     city = models.CharField(max_length=20, choices=CITY_CHOICES)
     batch_no = models.IntegerField()
     trainer = models.ForeignKey(interpreter, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
