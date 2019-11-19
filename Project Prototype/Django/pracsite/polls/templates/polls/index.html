@@ -31,6 +31,11 @@
         right: 1%;
         top: 12%;
     }
+    #logout {
+        position: absolute;
+        right: 7%;
+        top: 12%;
+    }
     #header {
         background-color: #0275d8 !important;
         color: white;
@@ -54,3 +59,4 @@
 <input type="button" class="btn btn-primary btn-lg btn1" name="add_btn" onclick="location.href='{% url 'polls:add_view' %}'" value="Add"/>
 <input type="button" class="btn btn-primary btn-lg btn2" name="search_btn" onclick="location.href='{% url 'polls:search_view' %}'" value="Search"/>
 <input type="button" class="btn btn-outline-primary btn-sm" name="about_button" value="About" id="about" onclick="location.href='{% url 'polls:about_view' %}'">
+<input type="button" class="btn btn-outline-primary btn-sm" name="about_button" value="Logout" id="logout" onclick="location.href='{%  url 'polls:logout_view' %}'">
