@@ -1,15 +1,41 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
+from django.contrib import messages
 
 from polls.forms import *
 
+username = "admin"
+psw = "admin"
+isLoggedIn = False
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Username")
+    password = forms.CharField(label="Password", widget=forms.PasswordInput())
+
+class LogoutView(TemplateView):
+    #Not really a view, just used to redirect to the login page.
+    template_name = 'polls/login.html'
+    def get(self, request):
+        global isLoggedIn
+        isLoggedIn = False
+        return redirect('polls:login_view')
+        
 class IndexView(TemplateView):
+    global isLoggedIn
     template_name = 'polls/index.html'
+    def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
+        else:
+            return render(request, 'polls/index.html', {})
+
 
 class AddView(TemplateView):
     template_name = 'polls/add.html'
     def get(self, request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
         form = AddForm()
         return render(request, self.template_name, {'form':form})
 
@@ -40,6 +66,8 @@ class AddView(TemplateView):
 class SearchView(TemplateView):
     template_name = 'polls/search.html'
     def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
         form = SearchForm()
         return render(request, self.template_name, {'form':form})
 
@@ -56,6 +84,8 @@ class SearchView(TemplateView):
 class InterpreterView(TemplateView):
     template_name = 'polls/interpreter.html'
     def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
         form = InterpreterForm()
         return render(request, self.template_name, {'form':form})
 
@@ -70,12 +100,14 @@ class InterpreterView(TemplateView):
         args = {'form':form}
         return render(request, self.template_name, args)
     
-    def __unicode__(self):
-        return u"%s" % self.name
+    #def __unicode__(self):
+    #    return u"%s" % self.name
 
 class CustomerView(TemplateView):
     template_name = 'polls/customer.html'
     def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
         form = CustomerForm()
         return render(request, self.template_name, {'form':form})
 
@@ -93,6 +125,8 @@ class CustomerView(TemplateView):
 class CompanyView(TemplateView):
     template_name = 'polls/company.html'
     def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
         form = CompanyForm()
         return render(request, self.template_name, {'form':form})
 
@@ -110,6 +144,8 @@ class CompanyView(TemplateView):
 class ContentView(TemplateView):
     template_name = 'polls/content.html'
     def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
         form = ContentForm()
         return render(request, self.template_name, {'form':form})
 
@@ -127,6 +163,8 @@ class ContentView(TemplateView):
 class StudentsView(TemplateView):
     template_name = 'polls/students.html'
     def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
         form = StudentsForm()
         return render(request, self.template_name, {'form':form})
 
@@ -144,6 +182,8 @@ class StudentsView(TemplateView):
 class ProjectView(TemplateView):
     template_name = 'polls/project.html'
     def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
         form = ProjectForm()
         return render(request, self.template_name, {'form':form})
 
@@ -161,6 +201,8 @@ class ProjectView(TemplateView):
 class CallView(TemplateView):
     template_name = 'polls/call.html'
     def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
         form = CallForm()
         return render(request, self.template_name, {'form':form})
 
@@ -177,3 +219,34 @@ class CallView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'polls/about.html'
+    def get(self , request):
+        if not isLoggedIn:
+            return redirect('polls:login_view')
+        else:
+            return render(request, 'polls/about.html', {})
+            
+
+class LoginView(TemplateView):
+    template_name = 'polls/login.html'
+    def get(self , request):
+        form = LoginForm()
+        return render(request, self.template_name, {'form':form})
+
+    def post(self, request):
+        global isLoggedIn
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            #extract data from form
+            print(form.cleaned_data)
+            if (form.cleaned_data['username'] == username and 
+            form.cleaned_data['password'] == psw):
+                #set flag
+                isLoggedIn = True
+                list(messages.get_messages(request))
+                return redirect('polls:index')
+            else:
+                #display error
+                messages.add_message(request, messages.ERROR, 'Incorrect Username or Password!')
+        
+        args = {'form':form}
+        return render(request, self.template_name, args)

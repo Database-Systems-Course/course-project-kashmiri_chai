@@ -2,6 +2,7 @@ from django import forms
 from polls.models import *
 
 
+
 class AddForm(forms.Form):
     # fields for interpreters, clients, content, students
     CATEGORY_CHOICES = [
@@ -124,3 +125,4 @@ class SearchForm(forms.Form):
     ]
     mode = forms.CharField(label='Category',
                            widget=forms.Select(choices=CATEGORY_CHOICES))
+
