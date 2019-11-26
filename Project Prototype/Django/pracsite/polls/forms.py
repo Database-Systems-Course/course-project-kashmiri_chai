@@ -2,7 +2,6 @@ from django import forms
 from polls.models import *
 
 
-
 class AddForm(forms.Form):
     # fields for interpreters, clients, content, students
     CATEGORY_CHOICES = [
@@ -28,7 +27,7 @@ class InterpreterForm(forms.ModelForm):
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = customer
-        fields = ('name', 'age','address', 'mobile_no',
+        fields = ('name', 'address', 'mobile_no',
                   'gender', 'date_of_joining')
 
 
@@ -55,12 +54,16 @@ class StudentsForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = project
-        fields = ('Interpreter', 'Client', 'Date', 'StartTime', 'EndTime', 'Payment', 'PaymentStatus')
+        fields = ('Interpreter', 'Client', 'Date', 'StartTime',
+                  'EndTime', 'Payment', 'PaymentStatus')
+
 
 class CallForm(forms.ModelForm):
     class Meta:
         model = call
-        fields = ('Interpreter', 'Customer', 'StartTime', 'EndTime', 'Reason', 'CustomerRating', 'InterpreterRating')
+        fields = ('Interpreter', 'Customer', 'StartTime', 'EndTime',
+                  'Reason', 'CustomerRating', 'InterpreterRating')
+
 
 class SearchForm(forms.Form):
     name = forms.CharField(label='Name/Title')
@@ -75,4 +78,3 @@ class SearchForm(forms.Form):
     ]
     mode = forms.CharField(label='Category',
                            widget=forms.Select(choices=CATEGORY_CHOICES))
-
