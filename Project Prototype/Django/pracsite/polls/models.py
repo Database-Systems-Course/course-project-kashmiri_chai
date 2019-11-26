@@ -10,7 +10,6 @@ class interpreter(models.Model):
     age = models.IntegerField()
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     mobile_no = models.IntegerField()
-    nic_no = models.IntegerField()
     address = models.CharField(max_length=200)
     calls_served = models.IntegerField(blank = True, null=True)
     average_rating = models.FloatField(blank = True, null=True)
@@ -28,7 +27,6 @@ class customer(models.Model):
     age = models.IntegerField()
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     mobile_no = models.IntegerField()
-    nic_no = models.IntegerField()
     address = models.CharField(max_length=200)
     date_of_joining = models.DateField()
 
@@ -38,8 +36,8 @@ class customer(models.Model):
 class company(models.Model):
     name = models.CharField(max_length=50)
     address = models.CharField(max_length=200)
-    poc_name = models.CharField(max_length=50)
-    poc_mobile_no = models.IntegerField()
+    PoC_Name = models.CharField(max_length=50)
+    PoC_Mobile_No = models.IntegerField()
     date_of_joining = models.DateField()
 
     def __str__(self):
@@ -87,3 +85,31 @@ class student(models.Model):
 
     def __str__(self):
         return self.name
+
+class call(models.Model):
+    Interpreter= models.ForeignKey(interpreter, on_delete=models.CASCADE)
+    Customer = models.ForeignKey(customer, on_delete=models.CASCADE)
+    StartTime = models.TimeField()
+    EndTime = models.TimeField()
+    Reason = models.CharField(max_length=250)
+    CustomerRating = models.IntegerField()
+    InterpreterRating = models.IntegerField()
+
+class project(models.Model):
+    Interpreter = models.ForeignKey(interpreter, on_delete=models.CASCADE)
+    Client = models.ForeignKey(company, on_delete=models.CASCADE)
+    Date = models.DateField()
+    StartTime = models.DateField()
+    EndTime = models.DateField()
+    Payment = models.IntegerField()
+    PaymentStatus = models.BooleanField(default=False)
+
+class rate(models.Model):
+    rate = models.IntegerField()
+    StartDate = models.DateField()
+    EndDate = models.DateField()
+
+class transaction(models.Model):
+    rate = models.ForeignKey(rate, on_delete=models.CASCADE)
+    project = models.ForeignKey(project, on_delete=models.CASCADE)
+    
