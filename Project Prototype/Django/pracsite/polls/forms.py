@@ -2,7 +2,6 @@ from django import forms
 from polls.models import *
 
 
-
 class AddForm(forms.Form):
     # fields for interpreters, clients, content, students
     CATEGORY_CHOICES = [
@@ -21,22 +20,22 @@ class AddForm(forms.Form):
 class InterpreterForm(forms.ModelForm):
     class Meta:
         model = interpreter
-        fields = ('name', 'age', 'nic_no', 'address', 'mobile_no',
+        fields = ('name', 'age', 'address', 'mobile_no',
                   'gender', 'date_of_joining')
 
 
 class CustomerForm(forms.ModelForm):
     class Meta:
         model = customer
-        fields = ('name', 'age', 'nic_no', 'address', 'mobile_no',
+        fields = ('name', 'address', 'mobile_no',
                   'gender', 'date_of_joining')
 
 
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = company
-        fields = ('name', 'address', 'poc_name',
-                  'poc_mobile_no', 'date_of_joining')
+        fields = ('name', 'address', 'PoC_Name',
+                  'PoC_Mobile_No', 'date_of_joining')
 
 
 class ContentForm(forms.ModelForm):
@@ -53,16 +52,18 @@ class StudentsForm(forms.ModelForm):
 
 
 class ProjectForm(forms.ModelForm):
-    interpreter_name = forms.CharField(label='Name')
-    client_name = forms.CharField(label='Client')
-    date = forms.DateField(label='Date')
-    start_time = forms.TimeField(label='Start Time')
-    end_time = forms.TimeField(label='End Time')
-    payment = forms.CharField(label='Payment')
-    payment_status = forms.BooleanField(label='Payment Status', required=False)
+    class Meta:
+        model = project
+        fields = ('Interpreter', 'Client', 'Date', 'StartTime',
+                  'EndTime', 'Payment', 'PaymentStatus')
+
 
 class CallForm(forms.ModelForm):
-    name = forms.CharField(label='Name')
+    class Meta:
+        model = call
+        fields = ('Interpreter', 'Customer', 'StartTime', 'EndTime',
+                  'Reason', 'Comments', 'CustomerRating', 'InterpreterRating')
+
 
 class SearchForm(forms.Form):
     name = forms.CharField(label='Name/Title')
