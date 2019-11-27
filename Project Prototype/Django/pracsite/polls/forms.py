@@ -78,3 +78,7 @@ class SearchForm(forms.Form):
     ]
     mode = forms.CharField(label='Category',
                            widget=forms.Select(choices=CATEGORY_CHOICES))
+
+class LoginForm(forms.Form):
+    username = forms.CharField(label="Username")
+    password = forms.CharField(label="Password", widget=forms.PasswordInput())

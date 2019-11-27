@@ -62,7 +62,6 @@ PAYMENT_CHOICES = [
 
 ]
 
-
 REASON_CHOICES = [
     ('personal', 'Personal'),
     ('govt/admin', 'Governmental/Administrative'),

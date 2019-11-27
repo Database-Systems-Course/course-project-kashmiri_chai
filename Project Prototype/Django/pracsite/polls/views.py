@@ -3,15 +3,12 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib import messages
 
+from polls.models import *
 from polls.forms import *
 
 username = "admin"
 psw = "admin"
 isLoggedIn = False
-
-class LoginForm(forms.Form):
-    username = forms.CharField(label="Username")
-    password = forms.CharField(label="Password", widget=forms.PasswordInput())
 
 class LogoutView(TemplateView):
     #Not really a view, just used to redirect to the login page.
@@ -76,6 +73,8 @@ class SearchView(TemplateView):
         if form.is_valid():
             #extract data from form
             print(form.cleaned_data)
+            if(form.cleaned_data['mode'] == 'interpreters'):
+                print(interpreter.objects.filter(name=form.cleaned_data['name']))
             return redirect('polls:index')
         
         args = {'form':form}
@@ -83,7 +82,7 @@ class SearchView(TemplateView):
 
 class InterpreterView(TemplateView):
     template_name = 'polls/interpreter.html'
-    def get(self , request):
+    def get(self, request):
         if not isLoggedIn:
             return redirect('polls:login_view')
         form = InterpreterForm()
