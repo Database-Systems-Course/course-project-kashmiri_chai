@@ -68,7 +68,7 @@ REASON_CHOICES = [
     ('job', 'Employment Related'),
     ('emergency', 'Emergency'),
     ('food', 'Food Delivery/Order'),
-    ('education', 'Educational Insitution'),
+    ('education', 'Educational Institution'),
     ('finance', 'Financial Institution'),
     ('info', 'Request for Information'),
 ]
@@ -79,7 +79,7 @@ class interpreter(models.Model):
     age = models.IntegerField()
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     mobile_no = models.IntegerField()
-    address = models.CharField(choices=ADDRESS_CHOICES, max_length=200)
+    address = models.CharField(max_length=200)
     calls_served = models.IntegerField(blank=True, null=True)
     average_rating = models.FloatField(blank=True, null=True)
     date_of_joining = models.DateField()
@@ -92,7 +92,7 @@ class customer(models.Model):
     name = models.CharField(max_length=50)
     gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     mobile_no = models.IntegerField()
-    address = models.CharField(choices=ADDRESS_CHOICES, max_length=200)
+    address = models.CharField(max_length=200)
     date_of_joining = models.DateField()
 
     def __str__(self):
@@ -101,7 +101,7 @@ class customer(models.Model):
 
 class company(models.Model):
     name = models.CharField(max_length=50)
-    address = models.CharField(choices=ADDRESS_CHOICES, max_length=200)
+    address = models.CharField(max_length=200)
     PoC_Name = models.CharField(max_length=50)
     PoC_Mobile_No = models.IntegerField()
     date_of_joining = models.DateField()
