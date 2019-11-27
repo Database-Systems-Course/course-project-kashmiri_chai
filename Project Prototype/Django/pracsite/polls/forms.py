@@ -62,7 +62,7 @@ class CallForm(forms.ModelForm):
     class Meta:
         model = call
         fields = ('Interpreter', 'Customer', 'StartTime', 'EndTime',
-                  'Reason', 'CustomerRating', 'InterpreterRating')
+                  'Reason', 'Comments', 'CustomerRating', 'InterpreterRating')
 
 
 class SearchForm(forms.Form):
