@@ -274,15 +274,21 @@ class ResultsView(ListView):
         elif resultMode == "ind_cust":
             return customer.objects.filter(name__icontains = resultName)
         elif resultMode == "company":
-            return company.objects.filter(name__icontains = resultName)
+            cName = company.objects.filter(name__icontains = resultName)
+            pName = company.objects.filter(PoC_Name__icontains = resultName)
+            return cName | pName
         elif resultMode == "content":
-            return content.objects.filter(name__icontains = resultName)
+            return content.objects.filter(title__icontains = resultName)
         elif resultMode == "students":
             return student.objects.filter(name__icontains = resultName)
         elif resultMode == "project":
-            return project.objects.filter(name__icontains = resultName)
+            iName = call.objects.filter(Interpreter__icontains = resultName)
+            cName = call.objects.filter(Client__icontains = resultName) 
+            return iName | cName
         elif resultMode == "call":
-            return call.objects.filter(name__icontains = resultName)
+            iName = call.objects.filter(Interpreter__icontains = resultName)
+            cName = call.objects.filter(Customer__icontains = resultName) 
+            return iName | cName
     
     def render_to_response(self, context):
         if not isLoggedIn:
