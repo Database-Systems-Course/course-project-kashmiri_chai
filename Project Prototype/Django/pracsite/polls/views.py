@@ -1,14 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.contrib import messages
 
-from polls.models import *
+from polls.models import interpreter, company
 from polls.forms import *
 
 username = "admin"
 psw = "admin"
 isLoggedIn = False
+resultMode = ""
+resultName = ""
 
 class LogoutView(TemplateView):
     #Not really a view, just used to redirect to the login page.
@@ -69,13 +71,16 @@ class SearchView(TemplateView):
         return render(request, self.template_name, {'form':form})
 
     def post(self, request):
+        global resultMode
+        global resultName
         form = SearchForm(request.POST)
         if form.is_valid():
             #extract data from form
             print(form.cleaned_data)
-            if(form.cleaned_data['mode'] == 'interpreters'):
-                print(interpreter.objects.filter(name=form.cleaned_data['name']))
-            return redirect('polls:index')
+            resultMode = form.cleaned_data['mode']
+            resultName = form.cleaned_data['name']
+            print(resultMode)
+            return redirect('polls:results_view')
         
         args = {'form':form}
         return render(request, self.template_name, args)
@@ -249,3 +254,43 @@ class LoginView(TemplateView):
         
         args = {'form':form}
         return render(request, self.template_name, args)
+
+class ResultsView(ListView):
+    global resultMode
+    global resultName
+
+    template_name = 'polls/results.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ResultsView, self).get_context_data(**kwargs)
+        context['resultMode'] = resultMode
+        print("Result mode: " + resultMode)
+        return context
+    
+    def get_queryset(self, **kwargs):
+        if resultMode == "interpreters":
+            print("queryset = interpreters [automatically]")
+            return interpreter.objects.filter(name__icontains = resultName)
+        elif resultMode == "ind_cust":
+            return customer.objects.filter(name__icontains = resultName)
+        elif resultMode == "company":
+            return company.objects.filter(name__icontains = resultName)
+        elif resultMode == "content":
+            return content.objects.filter(name__icontains = resultName)
+        elif resultMode == "students":
+            return student.objects.filter(name__icontains = resultName)
+        elif resultMode == "project":
+            return project.objects.filter(name__icontains = resultName)
+        elif resultMode == "call":
+            return call.objects.filter(name__icontains = resultName)
+    
+    def render_to_response(self, context):
+        if not isLoggedIn:
+            print("Tried accessing page illegally. Redirected to Login page!!")
+            return redirect('polls:login_view')
+
+        return super(ResultsView, self).render_to_response(context)
+    
+
+
+    

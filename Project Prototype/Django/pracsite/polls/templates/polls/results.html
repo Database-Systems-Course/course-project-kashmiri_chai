@@ -1,0 +1,218 @@
+{% load static %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+</head>
+<style type="text/css">
+    #header {
+    background-color: #0275d8 !important;
+    color: white;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    box-shadow: 0px 1px 5px black;
+    font-size: 45px;
+    }
+    #logo {
+    position: absolute;
+    right: 1%;
+    top: 2%;
+    zoom: 0.035;
+    }
+    #logout {
+        position: absolute;
+        right: 1%;
+        top: 12%;
+    }
+    table, th, td {
+        border: 1px solid white;
+    }
+</style>
+<body>
+        <div class="display-4" id='header'>
+                <img src="{% static "polls/ch_logo.png" %}" id="logo">
+                Results
+            </div>
+<div class="container" id="primary">
+    {% if resultMode == "interpreters" %}
+    <h1>{{resultMode}}</h1>
+
+    <table align="center" width="100%">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Mobile Number</th>
+            <th>Address</th>
+            <th>Calls Served</th>
+            <th>Average Rating</th>
+            <th>Date of Joining</th>
+        </tr>
+        {% for field in object_list %}
+        <tr>
+            <td>{{field.name}}</td>
+            <td>{{field.age}}</td>
+            <td>{{field.gender}}</td>
+            <td>{{field.mobile_no}}</td>
+            <td>{{field.address}}</td>
+            <td>{{field.calls_served}}</td>
+            <td>{{field.average_rating}}</td>
+            <td>{{field.date_of_joining}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% elif resultMode == "ind_cust" %}
+    <h1>{{resultMode}}</h1>
+
+    <table align="center" width="100%">
+        <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Mobile Number</th>
+            <th>Address</th>
+            <th>Date of Joining</th>
+        </tr>
+        {% for field in object_list %}
+        <tr>
+            <td>{{field.name}}</td>
+            <td>{{field.gender}}</td>
+            <td>{{field.mobile_no}}</td>
+            <td>{{field.address}}</td>
+            <td>{{field.date_of_joining}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% elif resultMode == "company" %}
+    <h1>{{resultMode}}</h1>
+
+    <table align="center" width="100%">
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>PoC Name</th>
+            <th>PoC Mobile Number</th>
+            <th>Date of Joining</th>
+        </tr>
+        {% for field in object_list %}
+        <tr>
+            <td>{{field.name}}</td>
+            <td>{{field.address}}</td>
+            <td>{{field.PoC_Name}}</td>
+            <td>{{field.PoC_Mobile_No}}</td>
+            <td>{{field.date_of_joining}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% elif resultMode == "content" %}
+    <h1>{{resultMode}}</h1>
+
+    <table align="center" width="100%">
+        <tr>
+            <th>Title</th>
+            <th>Interpreter</th>
+            <th>Link</th>
+            <th>Date of Release</th>
+        </tr>
+        {% for field in object_list %}
+        <tr>
+            <td>{{field.title}}</td>
+            <td>{{field.interpreter}}</td>
+            <td>{{field.link}}</td>
+            <td>{{field.date_of_release}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% elif resultMode == "students" %}
+    <h1>{{resultMode}}</h1>
+
+    <table align="center" width="100%">
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Mobile Number</th>
+            <th>Level</th>
+            <th>Classification</th>
+            <th>Occupation</th>
+            <th>City</th>
+            <th>Batch Number</th>
+            <th>Trainer</th>
+        </tr>
+        {% for field in object_list %}
+        <tr>
+            <td>{{field.name}}</td>
+            <td>{{field.age}}</td>
+            <td>{{field.gender}}</td>
+            <td>{{field.mobile_no}}</td>
+            <td>{{field.level}}</td>
+            <td>{{field.classification}}</td>
+            <td>{{field.occupation}}</td>
+            <td>{{field.city}}</td>
+            <td>{{field.batch_no}}</td>
+            <td>{{field.trainer}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% elif resultMode == "project" %}
+    <h1>{{resultMode}}</h1>
+
+    <table align="center" width="100%">
+        <tr>
+            <th>Interpreter</th>
+            <th>Client</th>
+            <th>Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Location</th>
+            <th>Purpose</th>
+            <th>Payment</th>
+            <th>Payment Status</th>
+        </tr>
+        {% for field in object_list %}
+        <tr>
+            <td>{{field.Interpreter}}</td>
+            <td>{{field.Client}}</td>
+            <td>{{field.Date}}</td>
+            <td>{{field.StartTime}}</td>
+            <td>{{field.EndTime}}</td>
+            <td>{{field.Location}}</td>
+            <td>{{field.Purpose}}</td>
+            <td>{{field.Payment}}</td>
+            <td>{{field.PaymentStatus}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% elif resultMode == "call" %}
+    <h1>{{resultMode}}</h1>
+
+    <table align="center" width="100%">
+        <tr>
+            <th>Interpreter</th>
+            <th>Customer</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Reason</th>
+            <th>Comments</th>
+            <th>Customer Rating</th>
+            <th>Interpreter Rating</th>
+        </tr>
+        {% for field in object_list %}
+        <tr>
+            <td>{{field.Interpreter}}</td>
+            <td>{{field.Customer}}</td>
+            <td>{{field.StartTime}}</td>
+            <td>{{field.EndTime}}</td>
+            <td>{{field.Reason}}</td>
+            <td>{{field.Comments}}</td>
+            <td>{{field.CustomerRating}}</td>
+            <td>{{field.InterpreterRating}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>NOPE</p>
+    {% endif %}
+</div>
+<button class="btn btn-primary btn-lg" id="back_btn" 
+    onclick="location.href='{% url 'polls:search_view' %}'">Back</button>
+    <input type="button" class="btn btn-outline-primary btn-sm" name="about_button" value="Logout" id="logout" onclick="location.href='{%  url 'polls:logout_view' %}'">
+</body>
