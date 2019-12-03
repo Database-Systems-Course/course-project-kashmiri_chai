@@ -33,7 +33,10 @@
     <br><br><br>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <table>
+            {{ form.as_table }}
+            </table>
+            <br><br>
         <button class="btn btn-primary btn-lg btn1" type="submit">Submit</button>
     </form>
 </div>

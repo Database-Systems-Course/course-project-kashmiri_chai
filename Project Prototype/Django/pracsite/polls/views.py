@@ -278,16 +278,19 @@ class ResultsView(ListView):
             pName = company.objects.filter(PoC_Name__icontains = resultName)
             return cName | pName
         elif resultMode == "content":
-            return content.objects.filter(title__icontains = resultName)
+            tName = content.objects.filter(title__icontains = resultName)
+            iName = content.objects.filter(interpreter__name__icontains = resultName)
+            return tName | iName
+
         elif resultMode == "students":
             return student.objects.filter(name__icontains = resultName)
         elif resultMode == "project":
-            iName = call.objects.filter(Interpreter__icontains = resultName)
-            cName = call.objects.filter(Client__icontains = resultName) 
+            iName = project.objects.filter(Interpreter__name__icontains = resultName)
+            cName = project.objects.filter(Client__name__icontains = resultName) 
             return iName | cName
         elif resultMode == "call":
-            iName = call.objects.filter(Interpreter__icontains = resultName)
-            cName = call.objects.filter(Customer__icontains = resultName) 
+            iName = call.objects.filter(Interpreter__name__icontains = resultName)
+            cName = call.objects.filter(Customer__name__icontains = resultName) 
             return iName | cName
     
     def render_to_response(self, context):
