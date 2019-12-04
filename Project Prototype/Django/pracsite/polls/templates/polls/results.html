@@ -33,8 +33,9 @@
                 Results
             </div>
 <div class="container" id="primary">
+    <br><br><br>
     {% if resultMode == "interpreters" %}
-    <h1>{{resultMode}}</h1>
+    
 
     <table align="center" width="100%">
         <tr>
@@ -52,7 +53,7 @@
             <td>{{field.name}}</td>
             <td>{{field.age}}</td>
             <td>{{field.gender}}</td>
-            <td>{{field.mobile_no}}</td>
+            <td>0{{field.mobile_no}}</td>
             <td>{{field.address}}</td>
             <td>{{field.calls_served}}</td>
             <td>{{field.average_rating}}</td>
@@ -61,7 +62,7 @@
         {% endfor %}
     </table>
     {% elif resultMode == "ind_cust" %}
-    <h1>{{resultMode}}</h1>
+    
 
     <table align="center" width="100%">
         <tr>
@@ -75,14 +76,13 @@
         <tr>
             <td>{{field.name}}</td>
             <td>{{field.gender}}</td>
-            <td>{{field.mobile_no}}</td>
+            <td>0{{field.mobile_no}}</td>
             <td>{{field.address}}</td>
             <td>{{field.date_of_joining}}</td>
         </tr>
         {% endfor %}
     </table>
     {% elif resultMode == "company" %}
-    <h1>{{resultMode}}</h1>
 
     <table align="center" width="100%">
         <tr>
@@ -97,13 +97,12 @@
             <td>{{field.name}}</td>
             <td>{{field.address}}</td>
             <td>{{field.PoC_Name}}</td>
-            <td>{{field.PoC_Mobile_No}}</td>
+            <td>0{{field.PoC_Mobile_No}}</td>
             <td>{{field.date_of_joining}}</td>
         </tr>
         {% endfor %}
     </table>
     {% elif resultMode == "content" %}
-    <h1>{{resultMode}}</h1>
 
     <table align="center" width="100%">
         <tr>
@@ -122,7 +121,6 @@
         {% endfor %}
     </table>
     {% elif resultMode == "students" %}
-    <h1>{{resultMode}}</h1>
 
     <table align="center" width="100%">
         <tr>
@@ -142,7 +140,7 @@
             <td>{{field.name}}</td>
             <td>{{field.age}}</td>
             <td>{{field.gender}}</td>
-            <td>{{field.mobile_no}}</td>
+            <td>0{{field.mobile_no}}</td>
             <td>{{field.level}}</td>
             <td>{{field.classification}}</td>
             <td>{{field.occupation}}</td>
@@ -153,7 +151,6 @@
         {% endfor %}
     </table>
     {% elif resultMode == "project" %}
-    <h1>{{resultMode}}</h1>
 
     <table align="center" width="100%">
         <tr>
@@ -182,7 +179,6 @@
         {% endfor %}
     </table>
     {% elif resultMode == "call" %}
-    <h1>{{resultMode}}</h1>
 
     <table align="center" width="100%">
         <tr>

@@ -2,6 +2,115 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+    <script>
+    function populate() {
+        var e = document.getElementById("modeField");
+        var category = e.options[e.selectedIndex].value;
+        
+        var searchByField = document.getElementById("searchBy");
+        searchByField.options.length = 0;
+
+        var interpreterValues = ["name", "age", "gender", "mobile_no", "address", "calls_served",
+        "average_rating", "date_of_joining"];
+        var interpreterOptions = ["Name", "Age", "Gender", "Mobile Number", "Address", 
+        "Calls Served", "Average Rating", "Date of Joining"];
+
+        var customerValues = ["name", "gender", "mobile_no", "address", "date_of_joining"];
+        var customerOptions = ["Name", "Gender", "Mobile Number", "Address", "Date of Joining"];
+
+        var companyValues = ["name", "address", "PoC_Name", "PoC_Mobile_No", "date_of_joining"];
+        var companyOptions = ["Name", "Address", "PoC Name", "PoC Mobile Number", "Date of Joining"];
+
+        var contentValues = ["title", "interpreter", "link", "date_of_release"];
+        var contentOptions = ["Title", "Interpreter", "Link", "Date of Release"];
+
+        var studentValues = ["name", "age", "gender", "mobile_no", "address",
+        "level", "classification", "occupation", "city", "batch_no", "trainer"];
+        var studentOptions = ["Name", "Age", "Gender", "Mobile Number", "Address",
+        "Level", "Classification", "Occupation", "City", "Batch Number", "Trainer"];
+
+        var callValues = ["Interpreter", "Customer", "StartTime", "EndTime", "Reason",
+        "Comments", "CustomerRating", "InterpreterRating"];
+        var callOptions = ["Interpreter", "Customer", "Start Time", "End Time", "Reason",
+        "Comments", "Customer Rating", "Interpreter Rating"];
+
+        var projectValues = ["Interpreter", "Client", "Date", "StartTime", "EndTime", "Location",
+        "Purpose", "Payment", "PaymentStatus"];
+        var projectOptions = ["Interpreter", "Client", "Date", "Start Time", "End Time", "Location",
+        "Purpose", "Payment", "Payment Status"];
+
+
+
+        if (category == "interpreters") {
+            for (var i=0; i<interpreterOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = interpreterValues[i];
+                opt.innerHTML = interpreterOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        } 
+        else if (category == "ind_cust") {
+            for (var i=0; i<customerOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = customerValues[i];
+                opt.innerHTML = customerOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        } 
+        else if (category == "company") {
+            for (var i=0; i<companyOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = companyValues[i];
+                opt.innerHTML = companyOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+        else if (category == "content") {
+            for (var i=0; i<contentOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = contentValues[i];
+                opt.innerHTML = contentOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+        else if (category == "students") {
+            for (var i=0; i<studentOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = studentValues[i];
+                opt.innerHTML = studentOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+        else if (category == "project") {
+            for (var i=0; i<projectOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = projectValues[i];
+                opt.innerHTML = projectOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+        else if (category == "call") {
+            for (var i=0; i<callOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = callValues[i];
+                opt.innerHTML = callOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+    }
+    
+    </script>
+
+
+
 </head>
 <style type="text/css">
     #header {
@@ -22,6 +131,11 @@
         position: absolute;
         right: 1%;
         top: 12%;
+    }
+    td {
+        padding: 7px;
+        padding-left: 25px;
+        padding-right: 25px;
     }
 </style>
 <body>
@@ -44,3 +158,7 @@
     onclick="location.href='{% url 'polls:index' %}'">Back</button>
     <input type="button" class="btn btn-outline-primary btn-sm" name="about_button" value="Logout" id="logout" onclick="location.href='{%  url 'polls:logout_view' %}'">
 </body>
+<script>
+document.getElementById("modeField").selectedIndex = -1;
+document.getElementById("searchBy").style.width = "175px";
+</script>
