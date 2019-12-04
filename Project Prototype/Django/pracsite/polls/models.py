@@ -1,15 +1,15 @@
 from django.db import models
 import datetime
 
-timeChoices = [("{0}:{1}".format(x, y), "{0}:{1}".format(x if x > 9 else "0"+str(
+timeChoices = [(datetime.time(x, y), "{0}:{1}".format(x if x > 9 else "0"+str(
     x), y if y > 9 else "0"+str(y))) for x in range(0, 24) for y in range(0, 60, 30)]
 
 RATING = [
-    ('1', 1),
-    ('2', 2),
-    ('3', 3),
-    ('4', 4),
-    ('5', 5),
+    (1, '1'),
+    (2, '2'),
+    (3, '3'),
+    (4, '4'),
+    (5, '5'),
 ]
 
 GENDER_CHOICES = [
@@ -129,7 +129,6 @@ class student(models.Model):
     classification = models.CharField(max_length=50, choices=CLASS_CHOICES)
     occupation = models.CharField(max_length=20)
     city = models.CharField(max_length=20, choices=CITY_CHOICES)
-    batch_no = models.IntegerField()
     trainer = models.ForeignKey(interpreter, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -147,7 +146,7 @@ class call(models.Model):
     InterpreterRating = models.IntegerField(choices=RATING)
 
     def __str__(self):
-        return self.Customer + " called " + self.Interpreter + " for " + self.Reason
+        return self.Customer + " called " + self.Interpreter + " for " + self.Rea
 
 
 class rate(models.Model):
@@ -172,9 +171,8 @@ class project(models.Model):
 
 
 class transaction(models.Model):
-    rate = models.ForeignKey(rate, on_delete=models.CASCADE)
-    project = models.ForeignKey(project, on_delete=models.CASCADE)
-    client = models.ForeignKey(company, on_delete=models.CASCADE)
-    interpreter = models.ForeignKey(interpreter, on_delete=models.CASCADE)
+    rate = models.OneToOneField(rate, on_delete=models.CASCADE)
+    project = models.OneToOneField(project, on_delete=models.CASCADE)
+    client = models.OneToOneField(company, on_delete=models.CASCADE)
     dueDate = models.DateField()
     ModeOfPayment = models.CharField(max_length=20, choices=PAYMENT_CHOICES)

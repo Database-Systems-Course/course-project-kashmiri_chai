@@ -48,13 +48,13 @@ class StudentsForm(forms.ModelForm):
     class Meta:
         model = student
         fields = ('name', 'age', 'gender', 'mobile_no', 'city',
-                  'level', 'classification', 'occupation', 'batch_no', 'trainer')
+                  'level', 'classification', 'occupation', 'trainer')
 
 
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = project
-        fields = ('Interpreter', 'Client', 'Date', 'StartTime',
+        fields = ('Interpreter', 'Client', 'Date', 'StartTime', 'Location', 'Purpose',
                   'EndTime', 'Payment', 'PaymentStatus')
 
 
@@ -78,6 +78,7 @@ class SearchForm(forms.Form):
     ]
     mode = forms.CharField(label='Category',
                            widget=forms.Select(choices=CATEGORY_CHOICES))
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username")

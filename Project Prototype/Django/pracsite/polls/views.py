@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
 from django.contrib import messages
 
-from polls.models import interpreter, company
+from polls.models import *
 from polls.forms import *
 
 username = "admin"
@@ -282,12 +282,16 @@ class ResultsView(ListView):
         elif resultMode == "students":
             return student.objects.filter(name__icontains = resultName)
         elif resultMode == "project":
-            iName = call.objects.filter(Interpreter__icontains = resultName)
-            cName = call.objects.filter(Client__icontains = resultName) 
+            interpreters = interpreter.objects.filter(name__icontains = resultName)
+            iName = project.objects.filter(Interpreter__in = interpreters)
+            client = company.objects.filter(name__icontains =resultName)
+            cName = project.objects.filter(Client__in = client) 
             return iName | cName
         elif resultMode == "call":
-            iName = call.objects.filter(Interpreter__icontains = resultName)
-            cName = call.objects.filter(Customer__icontains = resultName) 
+            interpreters = interpreter.objects.filter(name__icontains = resultName)
+            iName = call.objects.filter(Interpreter__in = interpreters)
+            cust = customer.objects.filter(name__icontains = resultName)
+            cName = call.objects.filter(Customer__in = cust) 
             return iName | cName
     
     def render_to_response(self, context):
