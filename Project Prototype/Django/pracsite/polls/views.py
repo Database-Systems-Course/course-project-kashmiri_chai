@@ -11,6 +11,7 @@ psw = "admin"
 isLoggedIn = False
 resultMode = ""
 resultName = ""
+resultSearchBy = ""
 
 class LogoutView(TemplateView):
     #Not really a view, just used to redirect to the login page.
@@ -73,13 +74,15 @@ class SearchView(TemplateView):
     def post(self, request):
         global resultMode
         global resultName
+        global resultSearchBy
         form = SearchForm(request.POST)
         if form.is_valid():
             #extract data from form
             print(form.cleaned_data)
             resultMode = form.cleaned_data['mode']
             resultName = form.cleaned_data['name']
-            print(resultMode)
+            resultSearchBy = form.cleaned_data['searchBy']
+            print("SELECT * FROM "+resultMode+" WHERE "+resultSearchBy+" LIKE "+resultName)
             return redirect('polls:results_view')
         
         args = {'form':form}
@@ -269,30 +272,130 @@ class ResultsView(ListView):
     
     def get_queryset(self, **kwargs):
         if resultMode == "interpreters":
-            print("queryset = interpreters [automatically]")
-            return interpreter.objects.filter(name__icontains = resultName)
+            if resultSearchBy == "name":
+                return interpreter.objects.filter(name__icontains = resultName)
+            elif resultSearchBy == "age":
+                return interpreter.objects.filter(age__icontains = resultName)
+            elif resultSearchBy == "gender":
+                return interpreter.objects.filter(gender__icontains = resultName)
+            elif resultSearchBy == "mobile_no":
+                return interpreter.objects.filter(mobile_no__icontains = resultName)
+            elif resultSearchBy == "address":
+                return interpreter.objects.filter(address__icontains = resultName)
+            elif resultSearchBy == "calls_served":
+                return interpreter.objects.filter(calls_served__icontains = resultName)
+            elif resultSearchBy == "average_rating":
+                return interpreter.objects.filter(average_rating__icontains = resultName)
+            elif resultSearchBy == "date_of_joining":
+                return interpreter.objects.filter(date_of_joining__icontains = resultName)
+
+
+
         elif resultMode == "ind_cust":
-            return customer.objects.filter(name__icontains = resultName)
+            if resultSearchBy == "name":
+                return customer.objects.filter(name__icontains = resultName)
+            elif resultSearchBy == "gender":
+                return customer.objects.filter(gender__icontains = resultName)
+            elif resultSearchBy == "mobile_no":
+                return customer.objects.filter(mobile_no__icontains = resultName)
+            elif resultSearchBy == "address":
+                return customer.objects.filter(address__icontains = resultName)
+            elif resultSearchBy == "date_of_joining":
+                return customer.objects.filter(date_of_joining__icontains = resultName)
+
+
+
         elif resultMode == "company":
-            cName = company.objects.filter(name__icontains = resultName)
-            pName = company.objects.filter(PoC_Name__icontains = resultName)
-            return cName | pName
+            if resultSearchBy == "name":
+                return company.objects.filter(name__icontains = resultName)
+            elif resultSearchBy == "address":
+                return company.objects.filter(address__icontains = resultName)
+            elif resultSearchBy == "PoC_Name":
+                return company.objects.filter(PoC_Name__icontains = resultName)
+            elif resultSearchBy == "PoC_Mobile_No":
+                return company.objects.filter(PoC_Mobile_No__icontains = resultName)
+            elif resultSearchBy == "date_of_joining":
+                return company.objects.filter(date_of_joining__icontains = resultName)
+
+
+
         elif resultMode == "content":
-            return content.objects.filter(title__icontains = resultName)
+            if resultSearchBy == "name":
+                return content.objects.filter(title__icontains = resultName)
+            elif resultSearchBy == "interpreter":
+                return content.objects.filter(interpreter__name__icontains = resultName)
+            elif resultSearchBy == "link":
+                return content.objects.filter(link__icontains = resultName)
+            elif resultSearchBy == "date_of_release":
+                return content.objects.filter(date_of_release__icontains = resultName)
+            
+
+
+
         elif resultMode == "students":
-            return student.objects.filter(name__icontains = resultName)
+            if resultSearchBy == "name":
+                return student.objects.filter(name__icontains = resultName)
+            elif resultSearchBy == "age":
+                return student.objects.filter(age__icontains = resultName)
+            elif resultSearchBy == "gender":
+                return student.objects.filter(gender__icontains = resultName)
+            elif resultSearchBy == "mobile_no":
+                return student.objects.filter(mobile_no__icontains = resultName)
+            elif resultSearchBy == "address":
+                return student.objects.filter(address__icontains = resultName)
+            elif resultSearchBy == "level":
+                return student.objects.filter(level__icontains = resultName)
+            elif resultSearchBy == "classification":
+                return student.objects.filter(classification__icontains = resultName)
+            elif resultSearchBy == "occupation":
+                return student.objects.filter(occupation__icontains = resultName)
+            elif resultSearchBy == "city":
+                return student.objects.filter(city__icontains = resultName)
+            elif resultSearchBy == "batch_no":
+                return student.objects.filter(batch_no__icontains = resultName)
+            elif resultSearchBy == "trainer":
+                return student.objects.filter(trainer__name__icontains = resultName)
+
+
+            
         elif resultMode == "project":
-            interpreters = interpreter.objects.filter(name__icontains = resultName)
-            iName = project.objects.filter(Interpreter__in = interpreters)
-            client = company.objects.filter(name__icontains =resultName)
-            cName = project.objects.filter(Client__in = client) 
-            return iName | cName
+            if resultSearchBy == "Interpreter":
+                return project.objects.filter(Interpreter__name__icontains = resultName)
+            elif resultSearchBy == "Client":
+                return project.objects.filter(Client__name__icontains = resultName) 
+            elif resultSearchBy == "Date":
+                return project.objects.filter(Date__icontains = resultName)
+            elif resultSearchBy == "StartTime":
+                return project.objects.filter(StartTime__icontains = resultName)
+            elif resultSearchBy == "EndTime":
+                return project.objects.filter(EndTime__icontains = resultName)
+            elif resultSearchBy == "Location":
+                return project.objects.filter(Location__icontains = resultName)
+            elif resultSearchBy == "Purpose":
+                return project.objects.filter(Purpose__icontains = resultName)
+            elif resultSearchBy == "Payment":
+                return project.objects.filter(Payment__icontains = resultName)
+            elif resultSearchBy == "PaymentStatus":
+                return project.objects.filter(PaymentStatus__icontains = resultName)
+
+
         elif resultMode == "call":
-            interpreters = interpreter.objects.filter(name__icontains = resultName)
-            iName = call.objects.filter(Interpreter__in = interpreters)
-            cust = customer.objects.filter(name__icontains = resultName)
-            cName = call.objects.filter(Customer__in = cust) 
-            return iName | cName
+            if resultSearchBy == "Interpreter":
+                return call.objects.filter(Interpreter__name__icontains = resultName)
+            elif resultSearchBy == "Customer":
+                return call.objects.filter(Customer__name__icontains = resultName) 
+            elif resultSearchBy == "StartTime":
+                return call.objects.filter(StartTime__icontains = resultName)
+            elif resultSearchBy == "EndTime":
+                return call.objects.filter(EndTime__icontains = resultName)
+            elif resultSearchBy == "Reason":
+                return call.objects.filter(Reason__icontains = resultName)
+            elif resultSearchBy == "Comments":
+                return call.objects.filter(Comments__icontains = resultName)
+            elif resultSearchBy == "CustomerRating":
+                return call.objects.filter(CustomerRating__icontains = resultName)
+            elif resultSearchBy == "InterpreterRating":
+                return call.objects.filter(InterpreterRating__icontains = resultName)
     
     def render_to_response(self, context):
         if not isLoggedIn:
