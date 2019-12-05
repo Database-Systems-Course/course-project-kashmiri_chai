@@ -11,34 +11,32 @@
         var searchByField = document.getElementById("searchBy");
         searchByField.options.length = 0;
 
-        var interpreterValues = ["name", "age", "gender", "mobile_no", "address", "calls_served",
-        "average_rating", "date_of_joining"];
-        var interpreterOptions = ["Name", "Age", "Gender", "Mobile Number", "Address", 
-        "Calls Served", "Average Rating", "Date of Joining"];
+        var interpreterValues = ["name", "age", "gender", "mobile_no", "address"];
+        var interpreterOptions = ["Name", "Age", "Gender", "Mobile Number", "Address"];
 
-        var customerValues = ["name", "gender", "mobile_no", "address", "date_of_joining"];
-        var customerOptions = ["Name", "Gender", "Mobile Number", "Address", "Date of Joining"];
+        var customerValues = ["name", "gender", "mobile_no", "address"];
+        var customerOptions = ["Name", "Gender", "Mobile Number", "Address"];
 
-        var companyValues = ["name", "address", "PoC_Name", "PoC_Mobile_No", "date_of_joining"];
-        var companyOptions = ["Name", "Address", "PoC Name", "PoC Mobile Number", "Date of Joining"];
+        var companyValues = ["name", "address", "PoC_Name", "PoC_Mobile_No"];
+        var companyOptions = ["Name", "Address", "PoC Name", "PoC Mobile Number"];
 
-        var contentValues = ["title", "interpreter", "link", "date_of_release"];
-        var contentOptions = ["Title", "Interpreter", "Link", "Date of Release"];
+        var contentValues = ["title", "interpreter"];
+        var contentOptions = ["Title", "Interpreter"];
 
         var studentValues = ["name", "age", "gender", "mobile_no", "address",
         "level", "classification", "occupation", "city", "batch_no", "trainer"];
         var studentOptions = ["Name", "Age", "Gender", "Mobile Number", "Address",
         "Level", "Classification", "Occupation", "City", "Batch Number", "Trainer"];
 
-        var callValues = ["Interpreter", "Customer", "StartTime", "EndTime", "Reason",
+        var callValues = ["Interpreter", "Customer", "Reason",
         "Comments", "CustomerRating", "InterpreterRating"];
-        var callOptions = ["Interpreter", "Customer", "Start Time", "End Time", "Reason",
+        var callOptions = ["Interpreter", "Customer", "Reason",
         "Comments", "Customer Rating", "Interpreter Rating"];
 
-        var projectValues = ["Interpreter", "Client", "Date", "StartTime", "EndTime", "Location",
-        "Purpose", "Payment", "PaymentStatus"];
-        var projectOptions = ["Interpreter", "Client", "Date", "Start Time", "End Time", "Location",
-        "Purpose", "Payment", "Payment Status"];
+        var projectValues = ["Interpreter", "Client", "Location",
+        "Purpose"];
+        var projectOptions = ["Interpreter", "Client", "Location",
+        "Purpose"];
 
 
 
@@ -107,6 +105,33 @@
         }
     }
     
+    function validate() {
+        var type = document.getElementById("searchBy").value;
+        var input = document.getElementById("id_name").value;
+        console.log(type)
+        console.log(input)
+        console.log(isNaN(input))
+        
+        var texts = ["name", "gender", "address", 
+        "PoC_name", "title", "interpreter", "level", 
+        "classification", "occupation", "city",
+        "trainer", "Customer", "Reason", "Comments",
+        "interpreter", "Client", "Location", "Purpose",
+        "Interpreter"]
+
+        var ints = ["age", "mobile_no", "PoC_mobile_no", 
+        "batch_no", "CustomerRating", "InterpreterRating"]
+
+        if (!isNaN(input) && texts.includes(type) ) {
+            document.getElementById("id_name").value = ""
+            alert("Please only enter text values!")
+        }
+        if (isNaN(input) && ints.includes(type)) {
+            document.getElementById("id_name").value = ""
+            alert("Please only enter integers!")
+        }
+    }
+
     </script>
 
 

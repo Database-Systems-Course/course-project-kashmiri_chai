@@ -77,13 +77,15 @@ class SearchForm(forms.Form):
     ]
     mode = forms.CharField(label='SELECT * FROM',
                            widget=forms.Select(choices=CATEGORY_CHOICES,
-                           attrs={"onChange":'populate()',
-                           "id":"modeField"}))
+                                               attrs={"onChange": 'populate()',
+                                                      "id": "modeField"}))
 
     searchBy = forms.CharField(label="WHERE",
-    widget=forms.Select(attrs={"id":"searchBy", "width":"100px"}))
+                               widget=forms.Select(attrs={"id": "searchBy", "width": "100px"}))
 
-    name = forms.CharField(label='LIKE', required=False)
+    name = forms.CharField(label='LIKE', required=False, widget=forms.TextInput(attrs={"onChange": 'validate()',
+                                                                                    "id": "id_name"}))
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username")
