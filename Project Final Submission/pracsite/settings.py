@@ -83,12 +83,12 @@ DATABASES = {
 
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql', 
-#         'NAME': 'db',                      
-#         'USER': 'admin',                      
-#         'PASSWORD': 'admin',         
-#         'HOST': '127.0.0.1',                 
-#         'PORT': '8000',          
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'db',
+#         'USER': 'admin',
+#         'PASSWORD': 'admin',
+#         'HOST': '127.0.0.1',
+#         'PORT': '8000',
 #     }
 # }
 

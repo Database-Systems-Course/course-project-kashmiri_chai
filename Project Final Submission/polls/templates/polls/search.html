@@ -2,6 +2,140 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+    <script>
+    function populate() {
+        var e = document.getElementById("modeField");
+        var category = e.options[e.selectedIndex].value;
+        
+        var searchByField = document.getElementById("searchBy");
+        searchByField.options.length = 0;
+
+        var interpreterValues = ["name", "age", "gender", "mobile_no", "address"];
+        var interpreterOptions = ["Name", "Age", "Gender", "Mobile Number", "Address"];
+
+        var customerValues = ["name", "gender", "mobile_no", "address"];
+        var customerOptions = ["Name", "Gender", "Mobile Number", "Address"];
+
+        var companyValues = ["name", "address", "PoC_Name", "PoC_Mobile_No"];
+        var companyOptions = ["Name", "Address", "PoC Name", "PoC Mobile Number"];
+
+        var contentValues = ["title", "interpreter"];
+        var contentOptions = ["Title", "Interpreter"];
+
+        var studentValues = ["name", "age", "gender", "mobile_no", "address",
+        "level", "classification", "occupation", "city", "batch_no", "trainer"];
+        var studentOptions = ["Name", "Age", "Gender", "Mobile Number", "Address",
+        "Level", "Classification", "Occupation", "City", "Batch Number", "Trainer"];
+
+        var callValues = ["Interpreter", "Customer", "Reason",
+        "Comments", "CustomerRating", "InterpreterRating"];
+        var callOptions = ["Interpreter", "Customer", "Reason",
+        "Comments", "Customer Rating", "Interpreter Rating"];
+
+        var projectValues = ["Interpreter", "Client", "Location",
+        "Purpose"];
+        var projectOptions = ["Interpreter", "Client", "Location",
+        "Purpose"];
+
+
+
+        if (category == "interpreters") {
+            for (var i=0; i<interpreterOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = interpreterValues[i];
+                opt.innerHTML = interpreterOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        } 
+        else if (category == "ind_cust") {
+            for (var i=0; i<customerOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = customerValues[i];
+                opt.innerHTML = customerOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        } 
+        else if (category == "company") {
+            for (var i=0; i<companyOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = companyValues[i];
+                opt.innerHTML = companyOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+        else if (category == "content") {
+            for (var i=0; i<contentOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = contentValues[i];
+                opt.innerHTML = contentOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+        else if (category == "students") {
+            for (var i=0; i<studentOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = studentValues[i];
+                opt.innerHTML = studentOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+        else if (category == "project") {
+            for (var i=0; i<projectOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = projectValues[i];
+                opt.innerHTML = projectOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+        else if (category == "call") {
+            for (var i=0; i<callOptions.length; i++) {
+                var opt = document.createElement("option");
+                opt.value = callValues[i];
+                opt.innerHTML = callOptions[i];
+
+                searchByField.appendChild(opt);
+            }
+        }
+    }
+    
+    function validate() {
+        var type = document.getElementById("searchBy").value;
+        var input = document.getElementById("id_name").value;
+        console.log(type)
+        console.log(input)
+        console.log(isNaN(input))
+        
+        var texts = ["name", "gender", "address", 
+        "PoC_name", "title", "interpreter", "level", 
+        "classification", "occupation", "city",
+        "trainer", "Customer", "Reason", "Comments",
+        "interpreter", "Client", "Location", "Purpose",
+        "Interpreter"]
+
+        var ints = ["age", "mobile_no", "PoC_mobile_no", 
+        "batch_no", "CustomerRating", "InterpreterRating"]
+
+        if (!isNaN(input) && texts.includes(type) ) {
+            document.getElementById("id_name").value = ""
+            alert("Please only enter text values!")
+        }
+        if (isNaN(input) && ints.includes(type)) {
+            document.getElementById("id_name").value = ""
+            alert("Please only enter integers!")
+        }
+    }
+
+    </script>
+
+
+
 </head>
 <style type="text/css">
     #header {
@@ -23,6 +157,11 @@
         right: 1%;
         top: 12%;
     }
+    td {
+        padding: 7px;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
 </style>
 <body>
         <div class="display-4" id='header'>
@@ -33,7 +172,10 @@
     <br><br><br>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <table>
+        {{ form.as_table }}
+        </table>
+        <br><br>        
         <button class="btn btn-primary btn-lg btn1" type="submit">Search</button>
     </form>
 </div>
@@ -41,3 +183,7 @@
     onclick="location.href='{% url 'polls:index' %}'">Back</button>
     <input type="button" class="btn btn-outline-primary btn-sm" name="about_button" value="Logout" id="logout" onclick="location.href='{%  url 'polls:logout_view' %}'">
 </body>
+<script>
+document.getElementById("modeField").selectedIndex = -1;
+document.getElementById("searchBy").style.width = "175px";
+</script>

@@ -66,18 +66,25 @@ class CallForm(forms.ModelForm):
 
 
 class SearchForm(forms.Form):
-    name = forms.CharField(label='Name/Title')
     CATEGORY_CHOICES = [
         ('interpreters', 'Interpreters'),
-        ('ind_cust', 'Individual Customer'),
-        ('company', 'Company'),
+        ('ind_cust', 'Individual Customers'),
+        ('company', 'Companies'),
         ('content', 'Content'),
         ('students', 'Students'),
-        ('project', 'Project'),
-        ('call', 'Call Record'),
+        ('project', 'Projects'),
+        ('call', 'Call Records'),
     ]
-    mode = forms.CharField(label='Category',
-                           widget=forms.Select(choices=CATEGORY_CHOICES))
+    mode = forms.CharField(label='SELECT * FROM',
+                           widget=forms.Select(choices=CATEGORY_CHOICES,
+                                               attrs={"onChange": 'populate()',
+                                                      "id": "modeField"}))
+
+    searchBy = forms.CharField(label="WHERE",
+                               widget=forms.Select(attrs={"id": "searchBy", "width": "100px"}))
+
+    name = forms.CharField(label='LIKE', required=False, widget=forms.TextInput(attrs={"onChange": 'validate()',
+                                                                                    "id": "id_name"}))
 
 
 class LoginForm(forms.Form):
