@@ -320,10 +320,8 @@ class ResultsView(ListView):
 
 
         elif resultMode == "content":
-            if resultSearchBy == "name":
+            if resultSearchBy == "title":
                 return content.objects.filter(title__icontains = resultName)
-            elif resultSearchBy == "interpreter":
-                return content.objects.filter(interpreter__name__icontains = resultName)
             elif resultSearchBy == "link":
                 return content.objects.filter(link__icontains = resultName)
             elif resultSearchBy == "date_of_release":
@@ -351,17 +349,13 @@ class ResultsView(ListView):
                 return student.objects.filter(occupation__icontains = resultName)
             elif resultSearchBy == "city":
                 return student.objects.filter(city__icontains = resultName)
-            elif resultSearchBy == "batch_no":
-                return student.objects.filter(batch_no__icontains = resultName)
             elif resultSearchBy == "trainer":
                 return student.objects.filter(trainer__name__icontains = resultName)
 
 
             
         elif resultMode == "project":
-            if resultSearchBy == "Interpreter":
-                return project.objects.filter(Interpreter__name__icontains = resultName)
-            elif resultSearchBy == "Client":
+            if resultSearchBy == "Client":
                 return project.objects.filter(Client__name__icontains = resultName) 
             elif resultSearchBy == "Date":
                 return project.objects.filter(Date__icontains = resultName)

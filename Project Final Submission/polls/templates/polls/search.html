@@ -20,11 +20,11 @@
         var companyValues = ["name", "address", "PoC_Name", "PoC_Mobile_No"];
         var companyOptions = ["Name", "Address", "PoC Name", "PoC Mobile Number"];
 
-        var contentValues = ["title", "interpreter"];
-        var contentOptions = ["Title", "Interpreter"];
+        var contentValues = ["title"];
+        var contentOptions = ["Title"];
 
         var studentValues = ["name", "age", "gender", "mobile_no", "address",
-        "level", "classification", "occupation", "city", "batch_no", "trainer"];
+        "level", "classification", "occupation", "city", "trainer"];
         var studentOptions = ["Name", "Age", "Gender", "Mobile Number", "Address",
         "Level", "Classification", "Occupation", "City", "Batch Number", "Trainer"];
 
@@ -33,9 +33,9 @@
         var callOptions = ["Interpreter", "Customer", "Reason",
         "Comments", "Customer Rating", "Interpreter Rating"];
 
-        var projectValues = ["Interpreter", "Client", "Location",
+        var projectValues = ["Client", "Location",
         "Purpose"];
-        var projectOptions = ["Interpreter", "Client", "Location",
+        var projectOptions = ["Client", "Location",
         "Purpose"];
 
 
@@ -119,8 +119,7 @@
         "interpreter", "Client", "Location", "Purpose",
         "Interpreter"]
 
-        var ints = ["age", "mobile_no", "PoC_mobile_no", 
-        "batch_no", "CustomerRating", "InterpreterRating"]
+        var ints = ["age", "mobile_no", "PoC_mobile_no", "CustomerRating", "InterpreterRating"]
 
         if (!isNaN(input) && texts.includes(type) ) {
             document.getElementById("id_name").value = ""
