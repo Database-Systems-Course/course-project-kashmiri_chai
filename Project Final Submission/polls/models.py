@@ -123,7 +123,7 @@ class content(models.Model):
 class student(models.Model):
     name = models.CharField(max_length=50)
     age = models.IntegerField()
-    gender = models.CharField(max_length=5, choices=GENDER_CHOICES)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
     mobile_no = models.IntegerField()
     level = models.CharField(max_length=20, choices=LEVEL_CHOICES)
     classification = models.CharField(max_length=50, choices=CLASS_CHOICES)
