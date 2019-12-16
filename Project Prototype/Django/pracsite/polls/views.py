@@ -351,8 +351,6 @@ class ResultsView(ListView):
                 return student.objects.filter(occupation__icontains = resultName)
             elif resultSearchBy == "city":
                 return student.objects.filter(city__icontains = resultName)
-            elif resultSearchBy == "batch_no":
-                return student.objects.filter(batch_no__icontains = resultName)
             elif resultSearchBy == "trainer":
                 return student.objects.filter(trainer__name__icontains = resultName)
 
